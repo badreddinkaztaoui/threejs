@@ -41,7 +41,7 @@ module.exports = {
   // Plugins
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Create a basic scene with three js",
+      title: "Transform objects with three js",
       filename: "index.html",
       template: path.resolve(__dirname, "../src/temp.html"),
       minify: true,
