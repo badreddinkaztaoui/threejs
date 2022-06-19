@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "../dist"),
     filename: "[name].[contenthash].js",
-    publicPath: "",
+    // publicPath: "",
     assetModuleFilename: (pathData) => {
       const filepath = path
         .dirname(pathData.filename)
