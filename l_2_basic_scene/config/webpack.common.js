@@ -41,7 +41,7 @@ module.exports = {
   // Plugins
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Webpack setup",
+      title: "Webpack starter",
       filename: "index.html",
       template: path.resolve(__dirname, "../src/temp.html"),
       minify: true,
