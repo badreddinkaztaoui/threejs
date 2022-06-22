@@ -41,7 +41,7 @@ module.exports = {
   // Plugins
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Fullscreen in threejs",
+      title: "Geometries in threejs",
       filename: "index.html",
       template: path.resolve(__dirname, "../src/temp.html"),
       minify: true,
