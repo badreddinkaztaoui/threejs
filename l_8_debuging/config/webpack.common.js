@@ -41,7 +41,7 @@ module.exports = {
   // Plugins
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Geometry in three js",
+      title: "Geometries in threejs",
       filename: "index.html",
       template: path.resolve(__dirname, "../src/temp.html"),
       minify: true,
