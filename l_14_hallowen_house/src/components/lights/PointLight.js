@@ -7,7 +7,7 @@ class PointLight {
     this.intensity = intensity;
     // Create point light
     this.light = new PointLightClass(this.color, this.intensity, 7);
-    // this.light.castShadow = true;
+    this.light.castShadow = true;
     this.light.shadow.camera.fov = 60;
     this.light.shadow.camera.far = 10;
     this.light.shadow.mapSize.width = 1024;

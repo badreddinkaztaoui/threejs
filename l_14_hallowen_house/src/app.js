@@ -71,7 +71,7 @@ scene.add(bushe1, bushe2, bushe3, bushe4);
 // Create graves
 //* Create graves group
 const graves = new THREE.Group();
-
+// Create grave mesh
 const graveMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
 const graveGeometry = new THREE.BoxBufferGeometry(0.4, 0.8, 0.2);
 
@@ -89,6 +89,10 @@ for (let i = 0; i < 50; i++) {
 }
 
 scene.add(graves);
+
+// Create ghosts
+const ghost1 = new THREE.SpotLight(0xffff00, 2, 4);
+scene.add(ghost1);
 
 // Create FOG
 const fog = new THREE.Fog("#262837", 2, 80);
@@ -134,6 +138,11 @@ gsap.to(camera.position, {
 
 const gameLoop = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  const ghostAngle = elapsedTime * 0.5;
+  ghost1.position.x = Math.sin(ghostAngle) * 6;
+  ghost1.position.z = Math.cos(ghostAngle) * 6;
+  ghost1.position.y = Math.sin(ghostAngle * 3);
 
   // Update controls
   controls.update();
