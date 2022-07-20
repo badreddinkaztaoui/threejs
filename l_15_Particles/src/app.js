@@ -37,7 +37,7 @@ scene.add(ambientLight);
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
-const particleTexture = textureLoader.load("/textures/particles/5.png");
+const particleTexture = textureLoader.load("/textures/particles/2.png");
 
 // Create particles
 // //TODO Create particles geometry
@@ -56,6 +56,7 @@ const count = 10000;
 const particlesGeometry = new THREE.BufferGeometry();
 
 const positions = new Float32Array(count * 3);
+const colorsPositions = new Float32Array(count * 3);
 
 for (let i = 0; i < count; i++) {
   const radius = Math.random() * 50;
@@ -64,13 +65,20 @@ for (let i = 0; i < count; i++) {
   positions[i3 + 0] = (Math.random() - 0.5) * radius;
   positions[i3 + 1] = (Math.random() - 0.5) * radius;
   positions[i3 + 2] = (Math.random() - 0.5) * radius;
+
+  colorsPositions[i3 + 0] = Math.random();
+  colorsPositions[i3 + 1] = Math.random();
+  colorsPositions[i3 + 2] = Math.random();
 }
 
 const attributes = new THREE.BufferAttribute(positions, 3);
+const colors = new THREE.BufferAttribute(colorsPositions, 3);
+
 particlesGeometry.setAttribute("position", attributes);
+particlesGeometry.setAttribute("color", colors);
 
 const particlesMaterial = new THREE.PointsMaterial();
-particlesMaterial.color = new THREE.Color(0x00ffff);
+// particlesMaterial.color = new THREE.Color(0x00ffff); //! Don't use it when using vertex colors
 particlesMaterial.size = 0.1;
 particlesMaterial.sizeAttenuation = true;
 particlesMaterial.transparent = true;
@@ -78,6 +86,8 @@ particlesMaterial.alphaMap = particleTexture;
 // particlesMaterial.alphaTest = 0.001;
 // particlesMaterial.depthTest = false;
 particlesMaterial.depthWrite = false;
+particlesMaterial.blending = THREE.AdditiveBlending;
+particlesMaterial.vertexColors = true;
 
 const particles = new THREE.Points(particlesGeometry, particlesMaterial);
 scene.add(particles);
@@ -130,7 +140,11 @@ window.addEventListener("dblclick", toggleFullScreen);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 
+const clock = new THREE.Clock();
+
 const gameLoop = () => {
+  const elapsedTime = clock.getElapsedTime();
+
   // Update controls
   controls.update();
   // Render
